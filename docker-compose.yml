@@ -12,6 +12,7 @@ services:
         ports:
             - '${APP_PORT:-80}:80'
             - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
+            - '6001:6001'
         environment:
             WWWUSER: '${WWWUSER}'
             LARAVEL_SAIL: 1
@@ -42,7 +43,10 @@ services:
             - sail
         healthcheck:
             test:
-              [ "CMD","mysqladmin","ping","-p${DB_PASSWORD}" ]
+                - CMD
+                - mysqladmin
+                - ping
+                - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
 networks:
@@ -51,4 +55,3 @@ networks:
 volumes:
     sail-mysql:
         driver: local
-

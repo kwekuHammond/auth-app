@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Middleware\WebSocketAuthMiddleware;
+use App\Http\Websockets\WebSocketHandler;
+use BeyondCode\LaravelWebSockets\Facades\WebSocketsRouter;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +17,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+//    return view('welcome');
+    return jsonErrorResponse('Author: Cryptech Links', 403);
+});
+
+WebSocketsRouter::webSocket('/sockets/get-data', WebSocketHandler::class);
+
+Route::get('/ws-test', function () {
+    return view('websocket');
 });

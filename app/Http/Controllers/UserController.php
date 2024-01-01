@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\StoreUserAction;
 use App\Actions\UpdateUserAction;
 use App\Actions\UserLoginAction;
+use App\Events\WebSocketTestEvent;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserUpdateRequest;
@@ -23,6 +24,7 @@ class UserController extends Controller
      */
     public function index(): Application|Response|ResponseFactory
     {
+        event(new WebSocketTestEvent(User::query()->get()));
         return paginatedJsonSuccessResponse(UserResource::collection(User::query()->simplePaginate(10)));
     }
 
@@ -63,5 +65,9 @@ class UserController extends Controller
         logger('### Authenticated Google User ###');
         logger($user->getName());
         return jsonSuccessResponse($user);
+    }
+
+    public function webSocketTest(){
+//        event(new WebSocketTestEvent);
     }
 }

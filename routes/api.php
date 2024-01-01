@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
@@ -14,6 +15,9 @@ use Laravel\Socialite\Facades\Socialite;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::get('/', function (){
+    return jsonErrorResponse('Author: Cryptech Links', 403);
+})->name('home');
 
 Route::get('/users', [UserController::class, 'index']);
 Route::post('/users', [UserController::class, 'store']);
@@ -28,3 +32,5 @@ Route::get('/auth/callback', [UserController::class, 'googleAuth']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('users', UserController::class)->only(['update', 'show']);
 });
+
+Route::post('file-upload', [FileUploadController::class]);

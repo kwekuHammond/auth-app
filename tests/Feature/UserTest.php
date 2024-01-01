@@ -12,7 +12,7 @@ use Tests\TestCase;
 
 class UserTest extends TestCase
 {
-    use RefreshDatabase; //trait to interact with the database when testing database
+    use RefreshDatabase; //trait to interact with the database when testing
 
     public function test_store_user_action()
     {
@@ -24,7 +24,7 @@ class UserTest extends TestCase
         ];
 
         $response = $this->post('http://localhost:8001/api/users', $requestData);
-        $response->assertStatus(200);
+        $response->assertStatus(201);
     }
 
     public function test_user_login(){
@@ -42,6 +42,11 @@ class UserTest extends TestCase
         $this->assertGuest();
         $response->assertStatus(200);
 //        $this->assertAuthenticated();
+    }
+
+    public function test_addition(){
+        $result = User::add(5, 9);
+        $this->assertEquals(14, $result);
     }
 
 }

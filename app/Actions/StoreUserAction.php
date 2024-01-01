@@ -22,7 +22,7 @@ class StoreUserAction
             $user->token = $token->plainTextToken;
             DB::commit();
 
-            return jsonSuccessResponse([new UserResource($user)]);
+            return jsonSuccessResponse([new UserResource($user)], 201);
         } catch (Exception $exception) {
             report($exception);
             DB::rollBack();
