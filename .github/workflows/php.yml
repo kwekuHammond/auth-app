@@ -3,13 +3,11 @@ name: Build Auth APP
 on:
   push:
     branches:
-    - main
-    - develop
+    - master
     
   pull_request:
     branches:
-    - develop
-    - main
+    - master
 
 permissions:
   contents: read
