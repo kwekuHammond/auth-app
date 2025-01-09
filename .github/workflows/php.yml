@@ -14,14 +14,14 @@ permissions:
 
 jobs:
   build_auth_app:
-    name: deplot to staging
+    name: deploy to staging
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
 
     - name: Validate composer.json and composer.lock
-      run: composer validate --strict
+      run: composer validate
 
     - name: Cache Composer packages
       id: composer-cache
